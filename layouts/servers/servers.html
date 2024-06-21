@@ -1,0 +1,26 @@
+{{ define "main" }}
+
+{{ $styles := resources.Get "css/schemes/servers_styles.css" }}
+{{ $styles = $styles | resources.ExecuteAsTemplate "css/schemes/asd.css" . }}
+{{ $styles = $styles | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $styles.Permalink }}">
+<article class="max-w-full">
+  <header>
+    {{ if .Params.showBreadcrumbs | default (.Site.Params.article.showBreadcrumbs | default false) }}
+    {{ partial "breadcrumbs.html" . }}
+    {{ end }}
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      {{ .Title | emojify }}
+    </h1>
+  </header>
+  <section class="max-w-full mt-6 prose dark:prose-invert">
+    {{ .Content }}
+
+  </section>
+  {{ $js := resources.Get "scripts/js/fetch_servers_data.js" | resources.Minify | resources.Fingerprint }}
+  <script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+  <footer class="pt-8">
+    {{ partial "sharing-links.html" . }}
+  </footer>
+</article>
+{{ end }}

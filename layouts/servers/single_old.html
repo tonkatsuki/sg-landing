@@ -1,8 +1,0 @@
-{{ define "main" }}
-<article>
-  {{ .Content }}
-  <pre id="servers-container"></pre> <!-- Use <pre> for formatted JSON display -->
-</article>
-{{ $js := resources.Get "scripts/js/fetch_servers.js" | resources.Minify | resources.Fingerprint }}
-<script src="{{ $js.RelPermalink }}"></script>
-{{ end }}

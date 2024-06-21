@@ -18,13 +18,13 @@
 
 [[main]]
   name = "Servers"
-  pageRef = "/servers"
+  pageRef = "servers"
   pre = "list"
   weight = 11
 
 [[main]]
   name = "About"
-  pageRef = "/about"
+  pageRef = "about"
   pre = "circle-info"
   weight = 12
 

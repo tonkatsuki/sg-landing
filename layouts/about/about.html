@@ -1,0 +1,28 @@
+{{ define "main" }}
+
+{{ $styles := resources.Get "css/schemes/about_styles.css" }}
+{{ $styles = $styles | resources.ExecuteAsTemplate "css/schemes/about_styles.css" . }}
+{{ $styles = $styles | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $styles.Permalink }}">
+<article class="max-w-full">
+  <header>
+    {{ if .Params.showBreadcrumbs | default (.Site.Params.article.showBreadcrumbs | default false) }}
+    {{ partial "breadcrumbs.html" . }}
+    {{ end }}
+    <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+      {{ .Title | emojify }}
+    </h1>
+  </header>
+  <section class="max-w-full mt-6 prose dark:prose-invert">
+    {{ .Content }}
+  </section>
+  {{ $discordJs := resources.Get "scripts/js/fetch_discord_data.js" | resources.Minify | resources.Fingerprint }}
+  <script src="{{ $discordJs.Permalink }}" integrity="{{ $discordJs.Data.Integrity }}"></script>
+
+  {{ $presidentsJs := resources.Get "scripts/js/fetch_presidents_data.js" | resources.Minify | resources.Fingerprint }}
+  <script src="{{ $presidentsJs.Permalink }}" integrity="{{ $presidentsJs.Data.Integrity }}"></script>
+  <footer class="pt-8">
+    {{ partial "sharing-links.html" . }}
+  </footer>
+</article>
+{{ end }}
