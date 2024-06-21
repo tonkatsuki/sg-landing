@@ -1,4 +1,4 @@
-const FETCH_URL = "http://135.148.3.4:27019/rolegrab";
+const FETCH_URL = "/data/rolegrab.json";
 const DEFAULT_AVATAR_PATH = "/icons/discordgenericavatar.png";
 const ORDERED_ROLES = [
   "President",

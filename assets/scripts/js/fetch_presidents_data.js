@@ -1,4 +1,4 @@
-(function() {
+(function () {
   const FETCH_URL_PRESIDENTS = "/data/presidents.json";
   const DEFAULT_PICTURE_PATH = "/images/unknown.png"; // Ensure this default path is correct
 
