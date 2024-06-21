@@ -1,4 +1,4 @@
-const FETCH_URL = "/data/rolegrab.json";
+const FETCH_URL = "https://test2.tonkatsuki.com/";
 const DEFAULT_AVATAR_PATH = "/icons/discordgenericavatar.png";
 const ORDERED_ROLES = [
   "President",
