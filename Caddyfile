@@ -1,0 +1,9 @@
+
+{
+    email kip@mayochips.com
+}
+
+test.tonkatsuki.com {
+    root * /srv
+    file_server
+}
