@@ -17,10 +17,10 @@
     {{ .Content }}
   </section>
   {{ $discordJs := resources.Get "scripts/js/fetch_discord_data.js" | resources.Minify | resources.Fingerprint }}
-  <script src="{{ $discordJs.Permalink }}" integrity="{{ $discordJs.Data.Integrity }}"></script>
+  <script src="{{ $discordJs.RelPermalink }}" integrity="{{ $discordJs.Data.Integrity }}"></script>
 
   {{ $presidentsJs := resources.Get "scripts/js/fetch_presidents_data.js" | resources.Minify | resources.Fingerprint }}
-  <script src="{{ $presidentsJs.Permalink }}" integrity="{{ $presidentsJs.Data.Integrity }}"></script>
+  <script src="{{ $presidentsJs.RelPermalink }}" integrity="{{ $presidentsJs.Data.Integrity }}"></script>
   <footer class="pt-8">
     {{ partial "sharing-links.html" . }}
   </footer>

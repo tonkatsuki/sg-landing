@@ -18,7 +18,7 @@
 
   </section>
   {{ $js := resources.Get "scripts/js/fetch_servers_data.js" | resources.Minify | resources.Fingerprint }}
-  <script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
   <footer class="pt-8">
     {{ partial "sharing-links.html" . }}
   </footer>
