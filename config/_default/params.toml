@@ -34,7 +34,7 @@ defaultFeaturedImage = "img/cover.png" # used as default for featured images in 
   showMenu = false
   showCopyright = true
   showThemeAttribution = false
-  showAppearanceSwitcher = false
+  showAppearanceSwitcher = true
   showScrollToTop = true
 
 [homepage]
