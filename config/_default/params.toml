@@ -7,7 +7,7 @@
 
 colorScheme = "sg"
 defaultAppearance = "dark" # valid options: light or dark
-autoSwitchAppearance = true
+autoSwitchAppearance = false
 
 enableSearch = true
 enableCodeCopy = false
@@ -34,7 +34,7 @@ defaultFeaturedImage = "img/cover.png" # used as default for featured images in 
   showMenu = false
   showCopyright = true
   showThemeAttribution = false
-  showAppearanceSwitcher = true
+  showAppearanceSwitcher = false
   showScrollToTop = true
 
 [homepage]

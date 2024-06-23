@@ -8,14 +8,14 @@ title = "Steam Gamers"
   isoCode = "en"
   rtl = false
   dateFormat = "2 January 2006"
-   logo = "img/SGLogo1.png"
+   logo = "img/sglogo-flat-text.png"
    secondaryLogo = "img/SGLogo1.png"
    # description = "Steam Gamers"
    copyright = "Steam-Gamers 2024"
 
  [author]
    name = "Steam Gamers Community"
-   image = "img/SGIcon.png"
+   image = "img/sglogo-flat-pictogram.png"
    headline = "Steam-Gamers is a multigame community focused around player connections and a place for YOU to play!"
 # bio = "A little bit about you"
    links = [

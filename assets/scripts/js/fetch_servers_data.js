@@ -48,7 +48,7 @@ function renderTable(data) {
           // Server name and map column
           const serverNameMapCell = document.createElement("td");
           serverNameMapCell.innerHTML =
-            `<span style="color:white;">${server.server_name}</span><br><span style="color:green;">@</span> ${server.map}`;
+            `${server.server_name}<br><span style="color:green;">@</span> ${server.map}`;
           row.appendChild(serverNameMapCell);
 
           // Players count column
