@@ -1,0 +1,19 @@
+test1.steam-gamers.net {
+    reverse_proxy /api/rolegrab/* discord-role-grabber:5000
+    reverse_proxy /api/servers/* a2s-service:5000
+    root * /srv
+    file_server
+    header {
+      # disable FLoC tracking
+      Permissions-Policy interest-cohort=()
+
+      # enable HSTS
+      Strict-Transport-Security max-age=31536000;
+
+      # disable clients from sniffing the media type
+      X-Content-Type-Options nosniff
+
+      # clickjacking protection
+      X-Frame-Options DENY
+    }
+}
