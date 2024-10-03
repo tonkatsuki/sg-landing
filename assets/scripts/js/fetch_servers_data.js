@@ -1,11 +1,12 @@
 const icons = {
   CS2: "/icons/cs2.png",
   Gmod: "/icons/gmod.png",
-  VRising: "/icons/vrising.png",
+  // VRising: "/icons/vrising.png",
 };
 
-const gameOrder = ["Gmod", "VRising", "CS2"];
-const fetchUrl = "/data/servers.json";
+// const gameOrder = ["Gmod", "VRising", "CS2"];
+const gameOrder = ["Gmod", "CS2"];
+const fetchUrl = "https://test1.steam-gamers.net/api/servers";
 
 async function fetchData(url) {
   try {
