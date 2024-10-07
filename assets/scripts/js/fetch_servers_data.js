@@ -6,7 +6,7 @@ const icons = {
 
 // const gameOrder = ["Gmod", "VRising", "CS2"];
 const gameOrder = ["Gmod", "CS2"];
-const fetchUrl = "http://135.148.3.1:27019/servers";
+const fetchUrl = "http://test3.tonkatsuki.com:27019/servers";
 
 async function fetchData(url) {
   try {
