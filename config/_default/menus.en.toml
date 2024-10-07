@@ -57,6 +57,18 @@
   url = "https://banned.steam-gamers.net/"
   weight = 20
 
+[[main]]
+  name = "Appeal via Discord"
+  parent = "Banned"
+  url = "https://dyno.gg/form/a8bf4783"
+  weight = 20
+
+[[main]]
+  name = "Appeal via Forums"
+  parent = "Banned"
+  url = "https://steam-gamers.net/forum/21-appeal-ban/"
+  weight = 20
+
 #[[main]]
 #  name = "example sub-menu 2"
 #  parent = "Parent"
