@@ -6,7 +6,7 @@ const icons = {
 
 // const gameOrder = ["Gmod", "VRising", "CS2"];
 const gameOrder = ["Gmod", "CS2"];
-const fetchUrl = "https://test1.steam-gamers.net/api/servers";
+const fetchUrl = "http://135.148.3.1:27019/servers";
 
 async function fetchData(url) {
   try {
