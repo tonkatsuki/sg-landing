@@ -1,11 +1,10 @@
 const icons = {
   CS2: "/icons/cs2.png",
   Gmod: "/icons/gmod.png",
-  // VRising: "/icons/vrising.png",
+  Valheim: "/icons/valheim.png",
 };
 
-// const gameOrder = ["Gmod", "VRising", "CS2"];
-const gameOrder = ["Gmod", "CS2"];
+const gameOrder = ["Gmod", "Valheim", "CS2"];
 const fetchUrl = "https://test3.tonkatsuki.com";
 
 async function fetchData(url) {
