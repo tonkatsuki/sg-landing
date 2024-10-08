@@ -155,15 +155,18 @@ function renderTable(data) {
 // Function to toggle the join options row
 function toggleJoinOptions(joinOptionsRow, button) {
   const joinOptionsDiv = joinOptionsRow.querySelector(".collapsible-join-content");
+  
+  // Toggle the display of the join options div (but not the whole row)
   if (joinOptionsDiv.style.display === "none") {
     joinOptionsDiv.style.display = "block";
-    joinOptionsRow.style.display = "table-row";
-    button.textContent = "Hide";
+    button.textContent = "Hide Join Options";
   } else {
     joinOptionsDiv.style.display = "none";
-    joinOptionsRow.style.display = "none";
     button.textContent = "Join";
   }
+  
+  // Ensure the joinOptionsRow itself doesn't collapse or disappear
+  joinOptionsRow.style.display = "table-row"; // Keep the row visible
 }
 
 function togglePlayerList(playerListRow, button) {
