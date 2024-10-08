@@ -1,43 +1,22 @@
-// Create the modal dynamically when the script loads
-const modal = document.createElement('div');
-modal.id = "join-modal";
-modal.style.display = "none"; // Hidden by default
-modal.style.position = "fixed";
-modal.style.zIndex = "1000";
-modal.style.left = "50%";
-modal.style.top = "50%";
-modal.style.transform = "translate(-50%, -50%)";
-modal.style.backgroundColor = "#333";
-modal.style.padding = "20px";
-modal.style.color = "white";
-modal.style.borderRadius = "8px";
-modal.innerHTML = `
-  <h3>Join Server</h3>
-  <p id="modal-address"></p>
-  <button id="steam-join-button">Join via Steam</button>
-  <button id="show-address-button">Show Server Address</button>
-  <button id="close-modal-button">Close</button>
-`;
-document.body.appendChild(modal);
+const icons = {
+  CS2: "/icons/cs2.png",
+  Gmod: "/icons/gmod.png",
+  Valheim: "/icons/valheim.png",
+};
+const gameOrder = ["Gmod", "Valheim", "CS2"];
+const fetchUrl = "https://test3.tonkatsuki.com";
 
-// Add event listeners to the modal buttons
-const steamJoinButton = document.getElementById('steam-join-button');
-const showAddressButton = document.getElementById('show-address-button');
-const closeModalButton = document.getElementById('close-modal-button');
-
-closeModalButton.addEventListener('click', () => {
-  modal.style.display = 'none';
-});
-
-function showModal(address) {
-  document.getElementById('modal-address').textContent = `Server Address: ${address}`;
-  steamJoinButton.onclick = () => {
-    window.location.href = `steam://${address}`;
-  };
-  showAddressButton.onclick = () => {
-    alert(`Connect to: ${address}`);
-  };
-  modal.style.display = 'block'; // Show the modal
+async function fetchData(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
+  }
 }
 
 function renderTable(data) {
@@ -68,19 +47,21 @@ function renderTable(data) {
           // Server name and map column
           const serverNameMapCell = document.createElement("td");
           serverNameMapCell.innerHTML =
-            `<span style="color:white;">${server.server_name}</span><br><span style="color:green;">@</span> ${server.map}`;
+            `
+              <span style="color:white;">${server.server_name}</span>
+              <br>
+              <span style="color:green;">@</span> ${server.map}
+            `;
           row.appendChild(serverNameMapCell);
 
           // Players count column
           const playersCell = document.createElement("td");
           playersCell.appendChild(
-            document.createTextNode(
-              `${server.players} / ${server.max_players}`,
-            ),
+            document.createTextNode(`${server.players} / ${server.max_players}`)
           );
           row.appendChild(playersCell);
 
-          // Show players button column
+          // Player list functionality
           const playerListCell = document.createElement("td");
           const playerListRow = document.createElement("tr");
           const playerListCellFull = document.createElement("td");
@@ -88,7 +69,6 @@ function renderTable(data) {
           const playerListDiv = document.createElement("div");
           playerListDiv.className = "collapsible-content";
           playerListDiv.style.display = "none"; // Hide the player list by default
-
           if (server.player_list && server.player_list.length > 0) {
             const button = document.createElement("button");
             button.textContent = "Show Players";
@@ -97,12 +77,10 @@ function renderTable(data) {
               togglePlayerList(playerListRow, button);
             });
             playerListCell.appendChild(button);
-
             const playerList = document.createElement("ul");
             server.player_list.forEach((player) => {
               const playerItem = document.createElement("li");
-              playerItem.textContent =
-                `Name: ${player.name}, Score: ${player.score}`;
+              playerItem.textContent = `Name: ${player.name}, Score: ${player.score}`;
               playerList.appendChild(playerItem);
             });
             playerListDiv.appendChild(playerList);
@@ -112,14 +90,17 @@ function renderTable(data) {
           playerListRow.style.display = "none";
           row.appendChild(playerListCell);
 
-          // Connect button column
+          // Connect button with popup functionality
           const connectCell = document.createElement("td");
           const connectButton = document.createElement("button");
           connectButton.textContent = "Join";
           connectButton.className = "join-button";
+
+          // Open popup on click
           connectButton.addEventListener("click", () => {
-            showModal(address);
+            openJoinPopup(address, server.server_name);
           });
+
           connectCell.appendChild(connectButton);
           row.appendChild(connectCell);
 
@@ -127,8 +108,69 @@ function renderTable(data) {
           table.appendChild(playerListRow);
         }
       }
-
       container.appendChild(table);
     }
   }
 }
+
+function togglePlayerList(playerListRow, button) {
+  const playerListDiv = playerListRow.querySelector(".collapsible-content");
+  if (playerListDiv.style.display === "none") {
+    playerListDiv.style.display = "block";
+    playerListRow.style.display = "table-row";
+    button.textContent = "Hide Players";
+  } else {
+    playerListDiv.style.display = "none";
+    playerListRow.style.display = "none";
+    button.textContent = "Show Players";
+  }
+}
+
+function openJoinPopup(address, serverName) {
+  // Create the popup element
+  const popup = document.createElement("div");
+  popup.className = "join-popup"; // Add a class for styling
+  popup.innerHTML = `
+    <h2>Join ${serverName}</h2>
+    <p>Choose your preferred join method:</p>
+    <button id="join-steam">Join via Steam (steam://${address})</button>
+    <button id="join-copy">Copy Server Address</button>
+    <button id="join-close">Close</button>
+  `;
+
+  // Append the popup to the body
+  document.body.appendChild(popup);
+
+  // Add event listeners for buttons
+  const joinSteamButton = document.getElementById("join-steam");
+  joinSteamButton.addEventListener("click", () => {
+    window.location.href = `steam://${address}`;
+    closePopup();
+  });
+
+  const copyButton = document.getElementById("join-copy");
+  copyButton.addEventListener("click", () => {
+    navigator.clipboard.writeText(`steam://${address}`);
+    closePopup();
+  });
+
+  const closeButton = document.getElementById("join-close");
+  closeButton.addEventListener("click", () => {
+    closePopup();
+  });
+}
+
+function closePopup() {
+  const popup = document.querySelector(".join-popup");
+  if (popup) {
+    popup.remove();
+  }
+}
+
+async function init() {
+  const data = await fetchData(fetchUrl);
+  if (data) {
+    renderTable(data);
+  }
+}
+init();
