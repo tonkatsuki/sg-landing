@@ -6,6 +6,7 @@ const icons = {
 
 const gameOrder = ["Gmod", "Valheim", "CS2"];
 const fetchUrl = "https://test3.tonkatsuki.com";
+const discordUrl = "https://discord.com/channels/399344695970496512/1292794891205738517/1292797521965482077"; // Discord link
 
 async function fetchData(url) {
   try {
@@ -55,8 +56,8 @@ function renderTable(data) {
           const playersCell = document.createElement("td");
           playersCell.appendChild(
             document.createTextNode(
-              `${server.players} / ${server.max_players}`
-            )
+              `${server.players} / ${server.max_players}`,
+            ),
           );
           row.appendChild(playersCell);
 
@@ -106,28 +107,35 @@ function renderTable(data) {
           joinOptionsDiv.className = "collapsible-join-content";
           joinOptionsDiv.style.display = "none"; // Hidden by default
 
-          // Join via Steam button
-          const steamJoinButton = document.createElement("button");
-          steamJoinButton.textContent = "Join via Steam";
-          steamJoinButton.className = "join-button"; // Match styling with the Join button
-          steamJoinButton.addEventListener("click", () => {
-            window.location.href = `steam://${address}`;
-          });
+          if (key === "Valheim") {
+            // Join instructions for Valheim
+            const discordButton = document.createElement("button");
+            discordButton.textContent = "Join instructions via Discord";
+            discordButton.className = "join-button"; // Same styling as other buttons
+            discordButton.addEventListener("click", () => {
+              window.open(discordUrl, "_blank"); // Open Discord link in a new tab
+            });
+            joinOptionsDiv.appendChild(discordButton);
+          } else {
+            // Join via Steam button for other games
+            const steamJoinButton = document.createElement("button");
+            steamJoinButton.textContent = "Join via Steam";
+            steamJoinButton.addEventListener("click", () => {
+              window.location.href = `steam://${address}`;
+            });
+            joinOptionsDiv.appendChild(steamJoinButton);
 
-          // Show address button
-          const showAddressButton = document.createElement("button");
-          showAddressButton.textContent = "Show Address";
-          showAddressButton.className = "join-button"; // Match styling with the Join button
-          showAddressButton.addEventListener("click", () => {
-            alert(`Connect to: ${address}`);
-          });
+            // Show address button for other games
+            const showAddressButton = document.createElement("button");
+            showAddressButton.textContent = "Show Address";
+            showAddressButton.addEventListener("click", () => {
+              alert(`Connect to: ${address}`);
+            });
+            joinOptionsDiv.appendChild(showAddressButton);
+          }
 
-          // Add buttons to the join options div
-          joinOptionsDiv.appendChild(steamJoinButton);
-          joinOptionsDiv.appendChild(showAddressButton);
           joinOptionsCellFull.appendChild(joinOptionsDiv);
           joinOptionsRow.appendChild(joinOptionsCellFull);
-          joinOptionsRow.style.display = "none"; // Hide the row by default
 
           // Toggle join options when "Join" button is clicked
           connectButton.addEventListener("click", () => {
@@ -139,7 +147,7 @@ function renderTable(data) {
 
           table.appendChild(row);
           table.appendChild(playerListRow);
-          table.appendChild(joinOptionsRow); // Append the hidden join options row
+          table.appendChild(joinOptionsRow);
         }
       }
 
@@ -151,16 +159,13 @@ function renderTable(data) {
 // Function to toggle the join options row
 function toggleJoinOptions(joinOptionsRow, button) {
   const joinOptionsDiv = joinOptionsRow.querySelector(".collapsible-join-content");
-  
-  // If the options are hidden, show them
   if (joinOptionsDiv.style.display === "none") {
     joinOptionsDiv.style.display = "block";
-    joinOptionsRow.style.display = "table-row";  // Show the row and options
-    button.textContent = "Hide Join Options";
+    joinOptionsRow.style.display = "table-row";
+    button.textContent = "Hide";
   } else {
-    // Hide both the options and the entire row
     joinOptionsDiv.style.display = "none";
-    joinOptionsRow.style.display = "none";  // Collapse the row
+    joinOptionsRow.style.display = "none";
     button.textContent = "Join";
   }
 }
