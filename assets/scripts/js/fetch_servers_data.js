@@ -1,3 +1,25 @@
+const icons = {
+  CS2: "/icons/cs2.png",
+  Gmod: "/icons/gmod.png",
+  Valheim: "/icons/valheim.png",
+};
+
+const gameOrder = ["Gmod", "Valheim", "CS2"];
+const fetchUrl = "https://test3.tonkatsuki.com";
+
+async function fetchData(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("There has been a problem with your fetch operation:", error);
+  }
+}
+
 function renderTable(data) {
   const container = document.getElementById("server-data");
   container.innerHTML = ""; // Clear previous content
@@ -7,7 +29,6 @@ function renderTable(data) {
       const servers = data.servers[key];
       const table = document.createElement("table");
       table.setAttribute("data-game", key);
-      table.style.borderCollapse = "collapse"; // Ensure the table is styled properly
 
       for (let address in servers) {
         if (servers.hasOwnProperty(address)) {
@@ -69,8 +90,7 @@ function renderTable(data) {
           playerListCellFull.appendChild(playerListDiv);
           playerListRow.appendChild(playerListCellFull);
           playerListRow.style.display = "none";
-          table.appendChild(row);
-          table.appendChild(playerListRow);
+          row.appendChild(playerListCell);
 
           // Connect button column
           const connectCell = document.createElement("td");
@@ -105,8 +125,6 @@ function renderTable(data) {
           joinOptionsDiv.appendChild(showAddressButton);
           joinOptionsCellFull.appendChild(joinOptionsDiv);
           joinOptionsRow.appendChild(joinOptionsCellFull);
-          joinOptionsRow.style.display = "none";
-          table.appendChild(joinOptionsRow);
 
           // Toggle join options when "Join" button is clicked
           connectButton.addEventListener("click", () => {
@@ -117,6 +135,8 @@ function renderTable(data) {
           row.appendChild(connectCell);
 
           table.appendChild(row);
+          table.appendChild(playerListRow);
+          table.appendChild(joinOptionsRow);
         }
       }
 
