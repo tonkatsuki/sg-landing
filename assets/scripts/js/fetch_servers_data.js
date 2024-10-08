@@ -96,7 +96,7 @@ function renderTable(data) {
           const connectCell = document.createElement("td");
           const connectButton = document.createElement("button");
           connectButton.textContent = "Join";
-          connectButton.className = "join-button";
+          connectButton.className = "join-button"; // Same class for uniform styling
 
           // Create join options row
           const joinOptionsRow = document.createElement("tr");
@@ -109,16 +109,13 @@ function renderTable(data) {
           // Join via Steam button
           const steamJoinButton = document.createElement("button");
           steamJoinButton.textContent = "Join via Steam";
-          steamJoinButton.addEventListener("click", () => {
-            window.location.href = `steam://${address}`;
-          });
+          steamJoinButton.className = "join-button";  // Same class as the "Join" button
+          steamJoinButton.style.marginRight = "10%";  // Add 10% spacing
 
           // Show address button
           const showAddressButton = document.createElement("button");
           showAddressButton.textContent = "Show Address";
-          showAddressButton.addEventListener("click", () => {
-            alert(`Connect to: ${address}`);
-          });
+          showAddressButton.className = "join-button";  // Same class as the "Join" button
 
           // Add buttons to the join options div
           joinOptionsDiv.appendChild(steamJoinButton);
@@ -151,7 +148,7 @@ function toggleJoinOptions(joinOptionsRow, button) {
   if (joinOptionsDiv.style.display === "none") {
     joinOptionsDiv.style.display = "block";
     joinOptionsRow.style.display = "table-row";
-    button.textContent = "Hide Join Options";
+    button.textContent = "Hide";
   } else {
     joinOptionsDiv.style.display = "none";
     joinOptionsRow.style.display = "none";
