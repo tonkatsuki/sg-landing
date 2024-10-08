@@ -7,6 +7,7 @@ function renderTable(data) {
       const servers = data.servers[key];
       const table = document.createElement("table");
       table.setAttribute("data-game", key);
+      table.style.borderCollapse = "collapse"; // Ensure the table is styled properly
 
       for (let address in servers) {
         if (servers.hasOwnProperty(address)) {
@@ -68,7 +69,8 @@ function renderTable(data) {
           playerListCellFull.appendChild(playerListDiv);
           playerListRow.appendChild(playerListCellFull);
           playerListRow.style.display = "none";
-          row.appendChild(playerListCell);
+          table.appendChild(row);
+          table.appendChild(playerListRow);
 
           // Connect button column
           const connectCell = document.createElement("td");
@@ -103,6 +105,8 @@ function renderTable(data) {
           joinOptionsDiv.appendChild(showAddressButton);
           joinOptionsCellFull.appendChild(joinOptionsDiv);
           joinOptionsRow.appendChild(joinOptionsCellFull);
+          joinOptionsRow.style.display = "none";
+          table.appendChild(joinOptionsRow);
 
           // Toggle join options when "Join" button is clicked
           connectButton.addEventListener("click", () => {
@@ -113,8 +117,6 @@ function renderTable(data) {
           row.appendChild(connectCell);
 
           table.appendChild(row);
-          table.appendChild(playerListRow);
-          table.appendChild(joinOptionsRow);
         }
       }
 
