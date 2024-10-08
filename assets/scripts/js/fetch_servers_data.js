@@ -1,23 +1,43 @@
-const icons = {
-  CS2: "/icons/cs2.png",
-  Gmod: "/icons/gmod.png",
-  Valheim: "/icons/valheim.png",
-};
+// Create the modal dynamically when the script loads
+const modal = document.createElement('div');
+modal.id = "join-modal";
+modal.style.display = "none"; // Hidden by default
+modal.style.position = "fixed";
+modal.style.zIndex = "1000";
+modal.style.left = "50%";
+modal.style.top = "50%";
+modal.style.transform = "translate(-50%, -50%)";
+modal.style.backgroundColor = "#333";
+modal.style.padding = "20px";
+modal.style.color = "white";
+modal.style.borderRadius = "8px";
+modal.innerHTML = `
+  <h3>Join Server</h3>
+  <p id="modal-address"></p>
+  <button id="steam-join-button">Join via Steam</button>
+  <button id="show-address-button">Show Server Address</button>
+  <button id="close-modal-button">Close</button>
+`;
+document.body.appendChild(modal);
 
-const gameOrder = ["Gmod", "Valheim", "CS2"];
-const fetchUrl = "https://test3.tonkatsuki.com";
+// Add event listeners to the modal buttons
+const steamJoinButton = document.getElementById('steam-join-button');
+const showAddressButton = document.getElementById('show-address-button');
+const closeModalButton = document.getElementById('close-modal-button');
 
-async function fetchData(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error("Network response was not ok " + response.statusText);
-    }
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("There has been a problem with your fetch operation:", error);
-  }
+closeModalButton.addEventListener('click', () => {
+  modal.style.display = 'none';
+});
+
+function showModal(address) {
+  document.getElementById('modal-address').textContent = `Server Address: ${address}`;
+  steamJoinButton.onclick = () => {
+    window.location.href = `steam://${address}`;
+  };
+  showAddressButton.onclick = () => {
+    alert(`Connect to: ${address}`);
+  };
+  modal.style.display = 'block'; // Show the modal
 }
 
 function renderTable(data) {
@@ -98,7 +118,7 @@ function renderTable(data) {
           connectButton.textContent = "Join";
           connectButton.className = "join-button";
           connectButton.addEventListener("click", () => {
-            window.location.href = `steam://${address}`;
+            showModal(address);
           });
           connectCell.appendChild(connectButton);
           row.appendChild(connectCell);
@@ -112,25 +132,3 @@ function renderTable(data) {
     }
   }
 }
-
-function togglePlayerList(playerListRow, button) {
-  const playerListDiv = playerListRow.querySelector(".collapsible-content");
-  if (playerListDiv.style.display === "none") {
-    playerListDiv.style.display = "block";
-    playerListRow.style.display = "table-row";
-    button.textContent = "Hide Players";
-  } else {
-    playerListDiv.style.display = "none";
-    playerListRow.style.display = "none";
-    button.textContent = "Show Players";
-  }
-}
-
-async function init() {
-  const data = await fetchData(fetchUrl);
-  if (data) {
-    renderTable(data);
-  }
-}
-
-init();
