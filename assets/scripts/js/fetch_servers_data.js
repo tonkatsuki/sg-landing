@@ -140,6 +140,7 @@ function renderTable(data) {
 
           joinOptionsCellFull.appendChild(joinOptionsDiv);
           joinOptionsRow.appendChild(joinOptionsCellFull);
+          joinOptionsRow.style.display = "none"; // Ensure it's not shown initially
 
           // Toggle join options when "Join" button is clicked
           connectButton.addEventListener("click", () => {
@@ -165,11 +166,11 @@ function toggleJoinOptions(joinOptionsRow, button) {
   const joinOptionsDiv = joinOptionsRow.querySelector(".collapsible-join-content");
   if (joinOptionsDiv.style.display === "none") {
     joinOptionsDiv.style.display = "block";
-    joinOptionsRow.style.display = "table-row";
+    joinOptionsRow.style.display = "table-row"; // Show the join options row
     button.textContent = "Hide Join Options";
   } else {
     joinOptionsDiv.style.display = "none";
-    joinOptionsRow.style.display = "none";
+    joinOptionsRow.style.display = "none"; // Hide the join options row
     button.textContent = "Join";
   }
 }
