@@ -111,11 +111,21 @@ function renderTable(data) {
           steamJoinButton.textContent = "Join via Steam";
           steamJoinButton.className = "join-button";  // Same class as the "Join" button
           steamJoinButton.style.marginRight = "10%";  // Add 10% spacing
+          
+          // Make sure correct address is passed
+          steamJoinButton.addEventListener("click", () => {
+            window.location.href = `steam://connect/${address}`; // Using steam://connect
+          });
 
           // Show address button
           const showAddressButton = document.createElement("button");
           showAddressButton.textContent = "Show Address";
           showAddressButton.className = "join-button";  // Same class as the "Join" button
+          
+          // Make sure correct address is shown
+          showAddressButton.addEventListener("click", () => {
+            alert(`Connect to: ${address}`);
+          });
 
           // Add buttons to the join options div
           joinOptionsDiv.appendChild(steamJoinButton);
@@ -148,7 +158,7 @@ function toggleJoinOptions(joinOptionsRow, button) {
   if (joinOptionsDiv.style.display === "none") {
     joinOptionsDiv.style.display = "block";
     joinOptionsRow.style.display = "table-row";
-    button.textContent = "Hide";
+    button.textContent = "Hide Join Options";
   } else {
     joinOptionsDiv.style.display = "none";
     joinOptionsRow.style.display = "none";
