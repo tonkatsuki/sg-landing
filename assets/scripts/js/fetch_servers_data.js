@@ -68,7 +68,6 @@ function renderTable(data) {
           playerListCellFull.colSpan = 5;
           const playerListDiv = document.createElement("div");
           playerListDiv.className = "collapsible-content";
-          playerListDiv.style.display = "none"; // Hide the player list by default
           if (server.player_list && server.player_list.length > 0) {
             const button = document.createElement("button");
             button.textContent = "Show Players";
@@ -87,7 +86,6 @@ function renderTable(data) {
           }
           playerListCellFull.appendChild(playerListDiv);
           playerListRow.appendChild(playerListCellFull);
-          playerListRow.style.display = "none";
           row.appendChild(playerListCell);
 
           // Connect button with popup functionality
@@ -98,7 +96,7 @@ function renderTable(data) {
 
           // Open popup on click
           connectButton.addEventListener("click", () => {
-            openJoinPopup(address, server.server_name);
+            openJoinPopup(address, server.server_name, connectButton);
           });
 
           connectCell.appendChild(connectButton);
@@ -126,7 +124,7 @@ function togglePlayerList(playerListRow, button) {
   }
 }
 
-function openJoinPopup(address, serverName) {
+function openJoinPopup(address, serverName, button) {
   // Create the popup element
   const popup = document.createElement("div");
   popup.className = "join-popup"; // Add a class for styling
@@ -138,8 +136,11 @@ function openJoinPopup(address, serverName) {
     <button id="join-close">Close</button>
   `;
 
-  // Append the popup to the body
-  document.body.appendChild(popup);
+  // Position the popup in the middle of the screen
+  popup.style.position = "absolute";
+  popup.style.top = "50%";
+  popup.style.left = "50%";
+  popup.style.transform = "translate(-50%, -50%)";
 
   // Add event listeners for buttons
   const joinSteamButton = document.getElementById("join-steam");
@@ -158,12 +159,27 @@ function openJoinPopup(address, serverName) {
   closeButton.addEventListener("click", () => {
     closePopup();
   });
+
+  // Show the popup and disable the button until closed
+  popup.style.display = "block";
+  button.disabled = true;
+
+  // Add a click event listener to the document to close the popup when clicking outside
+  document.addEventListener("click", function (event) {
+    if (event.target !== popup && !popup.contains(event.target)) {
+      closePopup();
+    }
+  });
 }
 
 function closePopup() {
   const popup = document.querySelector(".join-popup");
   if (popup) {
     popup.remove();
+    const joinButton = document.querySelector(".join-button");
+    if (joinButton) {
+      joinButton.disabled = false;
+    }
   }
 }
 
