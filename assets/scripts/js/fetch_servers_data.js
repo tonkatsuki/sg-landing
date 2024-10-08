@@ -158,7 +158,7 @@ function toggleJoinOptions(joinOptionsRow, button) {
   if (joinOptionsDiv.style.display === "none") {
     joinOptionsDiv.style.display = "block";
     joinOptionsRow.style.display = "table-row";
-    button.textContent = "Hide Join Options";
+    button.textContent = "Hide";
   } else {
     joinOptionsDiv.style.display = "none";
     joinOptionsRow.style.display = "none";
