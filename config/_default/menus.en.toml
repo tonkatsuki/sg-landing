@@ -36,13 +36,13 @@
 
 [[main]]
   name = "Donate"
-  url = "https://steam-gamers.net/donate/"
+  url = "https://forums.steam-gamers.net/donate/"
   pre = "ko-fi"
   weight = 14
 
 [[main]]
   name = "Forums"
-  url = "https://steam-gamers.net/forums"
+  url = "https://forums.steam-gamers.net/"
   pre = "comment"
   weight = 15
 
@@ -66,7 +66,7 @@
 [[main]]
   name = "Appeal via Forums"
   parent = "Banned"
-  url = "https://steam-gamers.net/forum/21-appeal-ban/"
+  url = "https://forums.steam-gamers.net/forum/21-appeal-ban/"
   weight = 23
 
 #[[main]]
