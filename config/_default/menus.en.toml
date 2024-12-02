@@ -47,6 +47,12 @@
   weight = 15
 
 [[main]]
+  name = "Times"
+  url = "https://times.steam-gamers.net/"
+  pre = "check"
+  weight = 16
+
+[[main]]
   name = "Banned"
   pre = "shield"
   weight = 20
