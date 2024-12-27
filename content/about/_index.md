@@ -39,8 +39,9 @@ Hover over role titles to see information about the role
 
   <div id="role-templates" style="display: none;">
     <div data-role="Director" data-description="The Directors are the highest rank in SG, aside from the President and Vice President, and are in charge of making major decisions to steer the community."></div>
-    <div data-role="Administrative Officer" data-description="AO's are former admins who have proven themselves to be loyal & hardworking, and as such have been promoted to a higher rank."></div>
+    <!-- <div data-role="Administrative Officer" data-description="AO's are former admins who have proven themselves to be loyal & hardworking, and as such have been promoted to a higher rank."></div> -->
     <div data-role="Technical Administrator" data-description="The TA position was formed to provide additional support to the community, improving our player experience across all SG platforms."></div>
+    <div data-role="Discord Mod" data-description="Discord Mods help keep our Discord server clean.">
     <div data-role="Server Administrator" data-description="Server Admins are experienced members who keep our servers clean and fun for our players."></div>
     <div data-role="Legend" data-description="The Legends group includes former higher up staff, longtime admins, and have earned the full respect of this community."></div>
     <div data-role="Supporter" data-description="Supporters help keep our servers alive by donating monthly. All community members, admin or not, can become a Supporter. Further details can be found on our Donate Page.
