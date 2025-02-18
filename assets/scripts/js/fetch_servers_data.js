@@ -6,7 +6,8 @@ const icons = {
 
 const gameOrder = ["Gmod", "Valheim", "CS2"];
 const fetchUrl = "https://test3.tonkatsuki.com";
-const discordUrl = "https://discord.com/channels/399344695970496512/1292794891205738517/1292797521965482077"; // Discord link
+const discordUrl =
+  "https://discord.com/channels/399344695970496512/1292794891205738517/1292797521965482077"; // Discord link
 
 async function fetchData(url) {
   try {
@@ -54,11 +55,7 @@ function renderTable(data) {
 
           // Players count column
           const playersCell = document.createElement("td");
-          playersCell.appendChild(
-            document.createTextNode(
-              `${server.players} / ${server.max_players}`,
-            ),
-          );
+          playersCell.textContent = `${server.players} / ${server.max_players}`;
           row.appendChild(playersCell);
 
           // Show players button column
@@ -69,7 +66,6 @@ function renderTable(data) {
           const playerListDiv = document.createElement("div");
           playerListDiv.className = "collapsible-content";
           playerListDiv.style.display = "none"; // Hide the player list by default
-
           if (server.player_list && server.player_list.length > 0) {
             const button = document.createElement("button");
             button.textContent = "Show Players";
@@ -78,7 +74,6 @@ function renderTable(data) {
               togglePlayerList(playerListRow, button);
             });
             playerListCell.appendChild(button);
-
             const playerList = document.createElement("ul");
             server.player_list.forEach((player) => {
               const playerItem = document.createElement("li");
@@ -111,7 +106,7 @@ function renderTable(data) {
             // Join instructions via Discord button
             const discordJoinButton = document.createElement("button");
             discordJoinButton.textContent = "Join instructions via Discord";
-            discordJoinButton.className = "join-button"; // Add the same styling
+            discordJoinButton.className = "join-button";
             discordJoinButton.addEventListener("click", () => {
               window.open(discordUrl, "_blank"); // Open Discord link in a new tab
             });
@@ -120,22 +115,34 @@ function renderTable(data) {
             // Join via Steam button
             const steamJoinButton = document.createElement("button");
             steamJoinButton.textContent = "Join via Steam";
-            steamJoinButton.className = "join-button"; // Add the same styling
+            steamJoinButton.className = "join-button";
             steamJoinButton.addEventListener("click", () => {
               window.location.href = `steam://${address}`;
             });
 
-            // Show address button
-            const showAddressButton = document.createElement("button");
-            showAddressButton.textContent = "Show Address";
-            showAddressButton.className = "join-button"; // Add the same styling
-            showAddressButton.addEventListener("click", () => {
-              alert(`Connect to: ${address}`);
+            // Copy Address button
+            const copyAddressButton = document.createElement("button");
+            copyAddressButton.textContent = "Copy Address 📎"; // Added paperclip emoji
+            copyAddressButton.className = "join-button";
+            copyAddressButton.style.backgroundColor = "#007bff"; // Blue color
+            copyAddressButton.style.color = "white"; // White text for contrast (optional)
+            copyAddressButton.style.borderColor = "#007bff"; // Blue border (optional)
+            copyAddressButton.addEventListener("click", () => {
+              navigator.clipboard.writeText(address)
+                .then(() => {
+                  copyAddressButton.textContent = "Copied!"; // Keep emoji during feedback
+                  setTimeout(() => {
+                    copyAddressButton.textContent = "Copy Address 📎"; // Restore with emoji
+                  }, 2000); // Reset button text after 2 seconds
+                })
+                .catch((err) => {
+                  console.error("Failed to copy: ", err);
+                  alert("Failed to copy address.  Please copy manually.");
+                });
             });
 
-            // Add buttons to the join options div
             joinOptionsDiv.appendChild(steamJoinButton);
-            joinOptionsDiv.appendChild(showAddressButton);
+            joinOptionsDiv.appendChild(copyAddressButton);
           }
 
           joinOptionsCellFull.appendChild(joinOptionsDiv);
@@ -146,16 +153,13 @@ function renderTable(data) {
           connectButton.addEventListener("click", () => {
             toggleJoinOptions(joinOptionsRow, connectButton);
           });
-
           connectCell.appendChild(connectButton);
           row.appendChild(connectCell);
-
           table.appendChild(row);
           table.appendChild(playerListRow);
           table.appendChild(joinOptionsRow);
         }
       }
-
       container.appendChild(table);
     }
   }
@@ -163,7 +167,9 @@ function renderTable(data) {
 
 // Function to toggle the join options row
 function toggleJoinOptions(joinOptionsRow, button) {
-  const joinOptionsDiv = joinOptionsRow.querySelector(".collapsible-join-content");
+  const joinOptionsDiv = joinOptionsRow.querySelector(
+    ".collapsible-join-content",
+  );
   if (joinOptionsDiv.style.display === "none") {
     joinOptionsDiv.style.display = "block";
     joinOptionsRow.style.display = "table-row"; // Show the join options row
