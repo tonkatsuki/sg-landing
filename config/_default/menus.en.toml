@@ -11,69 +11,69 @@
 # ordered by weight from lowest to highest.
 
 [[main]]
-  name = "News"
-  pageRef = "posts"
-  pre = "pencil"
-  weight = 10
+name = "News"
+pageRef = "posts"
+pre = "pencil"
+weight = 10
 
 [[main]]
-  name = "Servers"
-  pageRef = "servers"
-  pre = "list"
-  weight = 11
+name = "Servers"
+pageRef = "servers"
+pre = "list"
+weight = 11
 
 [[main]]
-  name = "About"
-  pageRef = "about"
-  pre = "circle-info"
-  weight = 12
+name = "About"
+pageRef = "about"
+pre = "circle-info"
+weight = 12
 
 [[main]]
-  name = "Discord"
-  url = "https://discord.gg/steamgamers"
-  pre = "discord"
-  weight = 13
+name = "Discord"
+url = "https://discord.steam-gamers.net/"
+pre = "discord"
+weight = 13
 
 [[main]]
-  name = "Donate"
-  url = "https://forums.steam-gamers.net/donate/"
-  pre = "ko-fi"
-  weight = 14
+name = "Donate"
+url = "https://forums.steam-gamers.net/donate/"
+pre = "ko-fi"
+weight = 14
 
 [[main]]
-  name = "Forums"
-  url = "https://forums.steam-gamers.net/"
-  pre = "comment"
-  weight = 15
+name = "Forums"
+url = "https://forums.steam-gamers.net/"
+pre = "comment"
+weight = 15
 
 [[main]]
-  name = "Times"
-  url = "https://times.steam-gamers.net/"
-  pre = "check"
-  weight = 16
+name = "Times"
+url = "https://times.steam-gamers.net/"
+pre = "check"
+weight = 16
 
 [[main]]
-  name = "Banned"
-  pre = "shield"
-  weight = 20
+name = "Banned"
+pre = "shield"
+weight = 20
 
 [[main]]
-  name = "Sourcebans"
-  parent = "Banned"
-  url = "https://banned.steam-gamers.net/"
-  weight = 21
+name = "Sourcebans"
+parent = "Banned"
+url = "https://banned.steam-gamers.net/"
+weight = 21
 
 [[main]]
-  name = "Appeal via Discord"
-  parent = "Banned"
-  url = "https://dyno.gg/form/a8bf4783"
-  weight = 22
+name = "Appeal via Discord"
+parent = "Banned"
+url = "https://dyno.gg/form/a8bf4783"
+weight = 22
 
 [[main]]
-  name = "Appeal via Forums"
-  parent = "Banned"
-  url = "https://forums.steam-gamers.net/forum/21-appeal-ban/"
-  weight = 23
+name = "Appeal via Forums"
+parent = "Banned"
+url = "https://forums.steam-gamers.net/forum/21-appeal-ban/"
+weight = 23
 
 #[[main]]
 #  name = "example sub-menu 2"
@@ -109,9 +109,9 @@
 
 
 [[footer]]
-  name = "Tags"
-  pageRef = "tags"
-  weight = 10
+name = "Tags"
+pageRef = "tags"
+weight = 10
 
 # [[footer]]
 #   name = "Categories"
