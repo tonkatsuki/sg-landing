@@ -34,11 +34,11 @@ url = "https://discord.steam-gamers.net/"
 pre = "discord"
 weight = 13
 
-[[main]]
-name = "Donate"
-url = "https://forums.steam-gamers.net/donate/"
-pre = "ko-fi"
-weight = 14
+# [[main]]
+# name = "Donate"
+# url = "https://forums.steam-gamers.net/donate/"
+# pre = "ko-fi"
+# weight = 14
 
 [[main]]
 name = "Forums"
